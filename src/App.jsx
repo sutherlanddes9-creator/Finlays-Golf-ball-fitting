@@ -77,9 +77,9 @@ export default function App() {
               <p className="text-xs text-emerald-400 font-semibold tracking-widest uppercase leading-none mb-0.5">
                 Finlay&apos;s Fairway Finds
               </p>
-              <h1 className="text-base sm:text-lg font-bold text-white leading-none tracking-tight">
+              <p className="text-base sm:text-lg font-bold text-white leading-none tracking-tight">
                 Golf Ball Fitting
-              </h1>
+              </p>
             </div>
           </div>
           {phase === PHASE.QUIZ && (
