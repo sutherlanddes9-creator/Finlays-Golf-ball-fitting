@@ -62,9 +62,9 @@ export default function App() {
               <p className="text-xs text-emerald-400 font-semibold tracking-widest uppercase leading-none mb-0.5">
                 Finlay&apos;s Fairway Finds
               </p>
-              <h1 className="text-base sm:text-lg font-bold text-white leading-none tracking-tight">
+              <p className="text-base sm:text-lg font-bold text-white leading-none tracking-tight">
                 Golf Ball Fitting
-              </h1>
+              </p>
             </div>
           </div>
           {phase === PHASE.QUIZ && (
@@ -97,12 +97,12 @@ export default function App() {
             </div>
 
             {/* Main heading */}
-            <h2 className="text-4xl sm:text-5xl font-bold text-white leading-tight tracking-tight mb-4">
-              Find Your{' '}
-              <span className="bg-gradient-to-r from-emerald-400 to-emerald-300 bg-clip-text text-transparent">
-                Perfect Ball
-              </span>
-            </h2>
+            <h1 className="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight mb-4">
+              <span className="bg-gradient-to-r from-emerald-400 via-green-400 to-emerald-300 bg-clip-text text-transparent">
+                Finlays Fairway Finds
+              </span>{' '}
+              <span className="text-white">Golf Ball Fitting</span>
+            </h1>
             <p className="text-base sm:text-lg text-white/60 leading-relaxed mb-8 max-w-md">
               Answer 10 quick questions and our fitting engine will match you with the ideal
               golf ball from Titleist, TaylorMade, Callaway, Srixon, Bridgestone, Kirkland, Wilson, Vice, Nike, Mizuno, and Seed.
