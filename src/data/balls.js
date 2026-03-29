@@ -15,6 +15,7 @@ export const balls = [
     feel: 'soft',
     windPerformance: 'good',
     shortGame: 'check',
+    durability: 'good',
     bestFor: {
       handicap: 'low',
       driverDistance: 'mid-high',
@@ -39,6 +40,7 @@ export const balls = [
     feel: 'firm',
     windPerformance: 'good',
     shortGame: 'check',
+    durability: 'good',
     bestFor: {
       handicap: 'low',
       driverDistance: 'high',
@@ -63,6 +65,7 @@ export const balls = [
     feel: 'soft',
     windPerformance: 'excellent',
     shortGame: 'check',
+    durability: 'average',
     bestFor: {
       handicap: 'low-mid',
       driverDistance: 'mid-high',
@@ -87,6 +90,7 @@ export const balls = [
     feel: 'mid',
     windPerformance: 'good',
     shortGame: 'check',
+    durability: 'good',
     bestFor: {
       handicap: 'mid',
       driverDistance: 'mid',
@@ -111,6 +115,7 @@ export const balls = [
     feel: 'soft',
     windPerformance: 'good',
     shortGame: 'both',
+    durability: 'excellent',
     bestFor: {
       handicap: 'mid-high',
       driverDistance: 'mid',
@@ -135,6 +140,7 @@ export const balls = [
     feel: 'firm',
     windPerformance: 'poor',
     shortGame: 'run',
+    durability: 'excellent',
     bestFor: {
       handicap: 'high',
       driverDistance: 'low-mid',
@@ -161,6 +167,7 @@ export const balls = [
     feel: 'soft',
     windPerformance: 'good',
     shortGame: 'check',
+    durability: 'good',
     bestFor: {
       handicap: 'low-mid',
       driverDistance: 'mid-high',
@@ -185,6 +192,7 @@ export const balls = [
     feel: 'firm',
     windPerformance: 'good',
     shortGame: 'check',
+    durability: 'good',
     bestFor: {
       handicap: 'low',
       driverDistance: 'high',
@@ -209,6 +217,7 @@ export const balls = [
     feel: 'soft',
     windPerformance: 'good',
     shortGame: 'check',
+    durability: 'good',
     bestFor: {
       handicap: 'mid',
       driverDistance: 'mid',
@@ -233,6 +242,7 @@ export const balls = [
     feel: 'firm',
     windPerformance: 'poor',
     shortGame: 'run',
+    durability: 'excellent',
     bestFor: {
       handicap: 'high',
       driverDistance: 'low',
@@ -259,6 +269,7 @@ export const balls = [
     feel: 'soft',
     windPerformance: 'good',
     shortGame: 'check',
+    durability: 'average',
     bestFor: {
       handicap: 'low-mid',
       driverDistance: 'mid',
@@ -283,6 +294,7 @@ export const balls = [
     feel: 'firm',
     windPerformance: 'good',
     shortGame: 'check',
+    durability: 'good',
     bestFor: {
       handicap: 'low',
       driverDistance: 'high',
@@ -307,6 +319,7 @@ export const balls = [
     feel: 'soft',
     windPerformance: 'average',
     shortGame: 'run',
+    durability: 'good',
     bestFor: {
       handicap: 'high',
       driverDistance: 'low',
@@ -331,6 +344,7 @@ export const balls = [
     feel: 'soft',
     windPerformance: 'average',
     shortGame: 'both',
+    durability: 'excellent',
     bestFor: {
       handicap: 'mid-high',
       driverDistance: 'mid',
@@ -357,6 +371,7 @@ export const balls = [
     feel: 'soft',
     windPerformance: 'good',
     shortGame: 'check',
+    durability: 'good',
     bestFor: {
       handicap: 'low-mid',
       driverDistance: 'mid-high',
@@ -381,6 +396,7 @@ export const balls = [
     feel: 'firm',
     windPerformance: 'good',
     shortGame: 'check',
+    durability: 'good',
     bestFor: {
       handicap: 'low',
       driverDistance: 'high',
@@ -405,6 +421,7 @@ export const balls = [
     feel: 'soft',
     windPerformance: 'good',
     shortGame: 'check',
+    durability: 'good',
     bestFor: {
       handicap: 'mid',
       driverDistance: 'mid',
@@ -429,6 +446,7 @@ export const balls = [
     feel: 'soft',
     windPerformance: 'average',
     shortGame: 'run',
+    durability: 'excellent',
     bestFor: {
       handicap: 'high',
       driverDistance: 'low-mid',
@@ -455,6 +473,7 @@ export const balls = [
     feel: 'soft',
     windPerformance: 'good',
     shortGame: 'check',
+    durability: 'good',
     bestFor: {
       handicap: 'low',
       driverDistance: 'mid-high',
@@ -479,6 +498,7 @@ export const balls = [
     feel: 'firm',
     windPerformance: 'good',
     shortGame: 'check',
+    durability: 'good',
     bestFor: {
       handicap: 'low',
       driverDistance: 'high',
@@ -503,6 +523,7 @@ export const balls = [
     feel: 'mid',
     windPerformance: 'average',
     shortGame: 'both',
+    durability: 'excellent',
     bestFor: {
       handicap: 'mid-high',
       driverDistance: 'mid',
@@ -527,6 +548,7 @@ export const balls = [
     feel: 'soft',
     windPerformance: 'average',
     shortGame: 'run',
+    durability: 'excellent',
     bestFor: {
       handicap: 'high',
       driverDistance: 'low-mid',
@@ -553,6 +575,7 @@ export const balls = [
     feel: 'soft',
     windPerformance: 'good',
     shortGame: 'check',
+    durability: 'good',
     bestFor: {
       handicap: 'low',
       driverDistance: 'mid-high',
@@ -577,6 +600,7 @@ export const balls = [
     feel: 'firm',
     windPerformance: 'good',
     shortGame: 'check',
+    durability: 'good',
     bestFor: {
       handicap: 'low',
       driverDistance: 'high',
@@ -586,6 +610,31 @@ export const balls = [
     description:
       'High-compression tour ball for fast swingers seeking maximum distance and a penetrating high flight. Urethane cover delivers world-class short-game control at a lower price than the big brands.',
     highlights: ['100 compression for fast swingers', 'High flight for extra carry', 'Tour-level urethane cover', 'Premium performance, lower price'],
+  },
+  {
+    id: 'wilson-staff-model-r',
+    brand: 'Wilson',
+    name: 'Staff Model R',
+    price: 'premium',
+    logo: '⚫',
+    coverType: 'urethane',
+    compression: 68,
+    layers: 3,
+    spin: 'mid',
+    flight: 'mid',
+    feel: 'soft',
+    windPerformance: 'good',
+    shortGame: 'check',
+    durability: 'good',
+    bestFor: {
+      handicap: 'mid',
+      driverDistance: 'mid',
+      ironCompression: 'low-mid',
+      miss: 'any',
+    },
+    description:
+      'Lower-compression version of the Staff Model, designed for moderate swing speeds who still want Tour-quality urethane performance.',
+    highlights: ['Low-compression urethane', 'Premium feel at moderate speed', 'Tour short-game control', 'Great for mid-handicappers'],
   },
   {
     id: 'wilson-triad',
@@ -601,6 +650,7 @@ export const balls = [
     feel: 'mid',
     windPerformance: 'good',
     shortGame: 'both',
+    durability: 'excellent',
     bestFor: {
       handicap: 'mid-high',
       driverDistance: 'mid',
@@ -625,6 +675,7 @@ export const balls = [
     feel: 'soft',
     windPerformance: 'average',
     shortGame: 'run',
+    durability: 'excellent',
     bestFor: {
       handicap: 'high',
       driverDistance: 'low',
@@ -651,6 +702,7 @@ export const balls = [
     feel: 'firm',
     windPerformance: 'good',
     shortGame: 'check',
+    durability: 'good',
     bestFor: {
       handicap: 'low',
       driverDistance: 'high',
@@ -675,6 +727,7 @@ export const balls = [
     feel: 'mid',
     windPerformance: 'good',
     shortGame: 'check',
+    durability: 'good',
     bestFor: {
       handicap: 'low-mid',
       driverDistance: 'mid-high',
@@ -699,6 +752,7 @@ export const balls = [
     feel: 'soft',
     windPerformance: 'good',
     shortGame: 'check',
+    durability: 'average',
     bestFor: {
       handicap: 'mid',
       driverDistance: 'mid',
@@ -710,9 +764,9 @@ export const balls = [
     highlights: ['Soft urethane feel', '75 compression for mid-speeds', 'Tour short-game control', 'Direct-to-consumer value'],
   },
   {
-    id: 'vice-tour',
+    id: 'vice-drive',
     brand: 'Vice',
-    name: 'Tour / Drive',
+    name: 'Drive',
     price: 'value',
     logo: '🟣',
     coverType: 'ionomer',
@@ -720,9 +774,10 @@ export const balls = [
     layers: 2,
     spin: 'low',
     flight: 'high',
-    feel: 'firm',
+    feel: 'soft',
     windPerformance: 'poor',
     shortGame: 'run',
+    durability: 'excellent',
     bestFor: {
       handicap: 'high',
       driverDistance: 'low-mid',
@@ -730,8 +785,8 @@ export const balls = [
       miss: 'any',
     },
     description:
-      'Vice\'s entry-level ionomer distance ball. Maximum durability and distance for high-handicappers who lose a lot of balls, at an outstanding direct-to-consumer price.',
-    highlights: ['Durable Surlyn cover', 'Maximum distance design', 'Outstanding value', 'Great for beginners'],
+      'Vice\'s entry-level distance ball. Low spin helps reduce hooks and slices while the soft feel makes it comfortable for all swing speeds.',
+    highlights: ['Budget-friendly distance ball', 'Low spin for straighter drives', 'Soft feel for a value ball', 'Available in multiple colours'],
   },
 
   // ─── Seed ────────────────────────────────────────────────────────────────────
@@ -749,6 +804,7 @@ export const balls = [
     feel: 'firm',
     windPerformance: 'good',
     shortGame: 'check',
+    durability: 'good',
     bestFor: {
       handicap: 'low',
       driverDistance: 'high',
@@ -773,6 +829,7 @@ export const balls = [
     feel: 'mid',
     windPerformance: 'good',
     shortGame: 'check',
+    durability: 'good',
     bestFor: {
       handicap: 'low-mid',
       driverDistance: 'mid-high',
@@ -797,6 +854,7 @@ export const balls = [
     feel: 'soft',
     windPerformance: 'good',
     shortGame: 'check',
+    durability: 'good',
     bestFor: {
       handicap: 'mid',
       driverDistance: 'mid',
@@ -821,6 +879,7 @@ export const balls = [
     feel: 'firm',
     windPerformance: 'poor',
     shortGame: 'run',
+    durability: 'excellent',
     bestFor: {
       handicap: 'high',
       driverDistance: 'low',
@@ -830,6 +889,31 @@ export const balls = [
     description:
       'Pure distance at a budget price. The 2-piece ionomer construction is built for maximum yards and durability — ideal for beginners or golfers who prefer a no-fuss distance ball.',
     highlights: ['Maximum distance design', 'Durable 2-piece ionomer cover', 'Budget-friendly price', 'Great for beginners'],
+  },
+  {
+    id: 'seed-sd-03',
+    brand: 'Seed',
+    name: 'SD-03 Soft',
+    price: 'value',
+    logo: '🌱',
+    coverType: 'ionomer',
+    compression: 55,
+    layers: 2,
+    spin: 'low',
+    flight: 'mid',
+    feel: 'soft',
+    windPerformance: 'average',
+    shortGame: 'run',
+    durability: 'excellent',
+    bestFor: {
+      handicap: 'high',
+      driverDistance: 'low-mid',
+      ironCompression: 'low',
+      miss: 'any',
+    },
+    description:
+      'Seed\'s soft distance ball for recreational golfers. Soft feel and low spin design helps maximise distance and keep shots straighter off the tee.',
+    highlights: ['Budget-friendly distance ball', 'Soft feel for all golfers', 'Low spin for straighter drives', 'Great value from Seed Golf'],
   },
 
   // ─── Kirkland ────────────────────────────────────────────────────────────────
@@ -847,6 +931,7 @@ export const balls = [
     feel: 'mid',
     windPerformance: 'good',
     shortGame: 'check',
+    durability: 'average',
     bestFor: {
       handicap: 'mid',
       driverDistance: 'mid',
@@ -871,6 +956,7 @@ export const balls = [
     feel: 'mid',
     windPerformance: 'good',
     shortGame: 'check',
+    durability: 'average',
     bestFor: {
       handicap: 'low-mid',
       driverDistance: 'mid-high',
@@ -880,154 +966,6 @@ export const balls = [
     description:
       'Upgraded Kirkland with 4-layer construction for better spin separation. Still crazy value — performs like a £45 ball for Costco prices.',
     highlights: ['4-layer spin separation', 'Higher flight for more carry', 'Urethane at value price', 'Best bang-for-buck option'],
-  },
-
-  // ─── Wilson ──────────────────────────────────────────────────────────────────
-  {
-    id: 'wilson-staff-model',
-    brand: 'Wilson',
-    name: 'Staff Model',
-    price: 'premium',
-    logo: '🟣',
-    coverType: 'urethane',
-    compression: 84,
-    layers: 3,
-    spin: 'high',
-    flight: 'mid',
-    feel: 'soft',
-    windPerformance: 'good',
-    shortGame: 'check',
-    bestFor: {
-      handicap: 'low-mid',
-      driverDistance: 'mid-high',
-      ironCompression: 'mid',
-      miss: 'any',
-    },
-    description:
-      'Wilson\'s Tour-proven flagship. Exceptional greenside control and a tour-soft feel at a price point that undercuts most premium rivals.',
-    highlights: ['Tour urethane cover', 'Soft feel through the bag', 'Competitive premium pricing', 'Excellent short-game spin'],
-  },
-  {
-    id: 'wilson-staff-model-r',
-    brand: 'Wilson',
-    name: 'Staff Model R',
-    price: 'premium',
-    logo: '🟣',
-    coverType: 'urethane',
-    compression: 68,
-    layers: 3,
-    spin: 'mid',
-    flight: 'mid',
-    feel: 'soft',
-    windPerformance: 'good',
-    shortGame: 'check',
-    bestFor: {
-      handicap: 'mid',
-      driverDistance: 'mid',
-      ironCompression: 'low-mid',
-      miss: 'any',
-    },
-    description:
-      'Lower-compression version of the Staff Model, designed for moderate swing speeds who still want Tour-quality urethane performance.',
-    highlights: ['Low-compression urethane', 'Premium feel at moderate speed', 'Tour short-game control', 'Great for mid-handicappers'],
-  },
-  {
-    id: 'wilson-duo-soft-plus',
-    brand: 'Wilson',
-    name: 'Duo Soft+',
-    price: 'value',
-    logo: '🟣',
-    coverType: 'ionomer',
-    compression: 35,
-    layers: 2,
-    spin: 'low',
-    flight: 'mid',
-    feel: 'soft',
-    windPerformance: 'average',
-    shortGame: 'run',
-    bestFor: {
-      handicap: 'high',
-      driverDistance: 'low',
-      ironCompression: 'low',
-      miss: 'any',
-    },
-    description:
-      'One of the softest golf balls available. Ultra-low compression gives maximum distance and a pillow-soft feel for slower swing speeds.',
-    highlights: ['Ultra-low 35 compression', 'One of the softest balls made', 'Maximum distance for slow swings', 'Very affordable'],
-  },
-
-  // ─── Vice ────────────────────────────────────────────────────────────────────
-  {
-    id: 'vice-pro-plus',
-    brand: 'Vice',
-    name: 'Pro Plus',
-    price: 'premium',
-    logo: '🟤',
-    coverType: 'urethane',
-    compression: 92,
-    layers: 4,
-    spin: 'high',
-    flight: 'high',
-    feel: 'firm',
-    windPerformance: 'good',
-    shortGame: 'check',
-    bestFor: {
-      handicap: 'low',
-      driverDistance: 'high',
-      ironCompression: 'high',
-      miss: 'hook',
-    },
-    description:
-      'Vice\'s premium high-compression ball for fast swingers. Delivers tour-level distance and greenside control at a below-market price.',
-    highlights: ['High-compression urethane', 'Tour distance for fast swingers', 'Competitive premium pricing', 'Excellent short-game performance'],
-  },
-  {
-    id: 'vice-pro',
-    brand: 'Vice',
-    name: 'Pro',
-    price: 'mid',
-    logo: '🟤',
-    coverType: 'urethane',
-    compression: 82,
-    layers: 3,
-    spin: 'mid-high',
-    flight: 'mid',
-    feel: 'soft',
-    windPerformance: 'good',
-    shortGame: 'check',
-    bestFor: {
-      handicap: 'low-mid',
-      driverDistance: 'mid',
-      ironCompression: 'mid',
-      miss: 'any',
-    },
-    description:
-      'A direct-to-consumer urethane ball that rivals premium options at mid-range prices. Outstanding value with genuine Tour ball characteristics.',
-    highlights: ['Urethane cover at mid-range price', 'Soft feel with high spin', 'Direct-to-consumer value', 'Tour-quality performance'],
-  },
-  {
-    id: 'vice-drive',
-    brand: 'Vice',
-    name: 'Drive',
-    price: 'value',
-    logo: '🟤',
-    coverType: 'ionomer',
-    compression: 65,
-    layers: 2,
-    spin: 'low',
-    flight: 'high',
-    feel: 'soft',
-    windPerformance: 'poor',
-    shortGame: 'run',
-    bestFor: {
-      handicap: 'high',
-      driverDistance: 'low-mid',
-      ironCompression: 'low',
-      miss: 'any',
-    },
-    description:
-      'Vice\'s entry-level distance ball. Low spin helps reduce hooks and slices while the soft feel makes it comfortable for all swing speeds.',
-    highlights: ['Budget-friendly distance ball', 'Low spin for straighter drives', 'Soft feel for a value ball', 'Available in multiple colours'],
   },
 
   // ─── Nike ────────────────────────────────────────────────────────────────────
@@ -1045,6 +983,7 @@ export const balls = [
     feel: 'soft',
     windPerformance: 'good',
     shortGame: 'check',
+    durability: 'good',
     bestFor: {
       handicap: 'low',
       driverDistance: 'high',
@@ -1052,7 +991,7 @@ export const balls = [
       miss: 'any',
     },
     description:
-      'Nike\'s Tour-level flagship, played by Rory McIlroy during his Tour career. Nike exited golf equipment in 2016, but stocks of these balls can still be found. Exceptional feel and control for low-handicap golfers.',
+      'Nike\'s Tour-level flagship, played by Rory McIlroy during his Tour career. Nike exited golf equipment in 2016, but stocks can still be found. Exceptional feel and control for low-handicap golfers.',
     highlights: ['Tour urethane cover', 'Played by Rory McIlroy on Tour', 'Soft feel with high spin', 'Premium short-game performance'],
   },
   {
@@ -1069,6 +1008,7 @@ export const balls = [
     feel: 'soft',
     windPerformance: 'poor',
     shortGame: 'run',
+    durability: 'excellent',
     bestFor: {
       handicap: 'high',
       driverDistance: 'low',
@@ -1076,7 +1016,7 @@ export const balls = [
       miss: 'any',
     },
     description:
-      'Nike\'s distance ball for recreational golfers. Nike exited golf equipment in 2016, but Mojo stocks are still available. Soft feel and easy launch help beginners and high-handicappers get more from every tee shot.',
+      'Nike\'s distance ball for recreational golfers. Nike exited golf equipment in 2016, but Mojo stocks are still available. Soft feel and easy launch for beginners and high-handicappers.',
     highlights: ['Easy launch for slow swings', 'Soft feel at impact', 'Maximum distance design', 'Great for beginners'],
   },
 
@@ -1095,6 +1035,7 @@ export const balls = [
     feel: 'firm',
     windPerformance: 'good',
     shortGame: 'check',
+    durability: 'good',
     bestFor: {
       handicap: 'low',
       driverDistance: 'high',
@@ -1119,6 +1060,7 @@ export const balls = [
     feel: 'soft',
     windPerformance: 'good',
     shortGame: 'check',
+    durability: 'good',
     bestFor: {
       handicap: 'mid',
       driverDistance: 'mid',
@@ -1143,6 +1085,7 @@ export const balls = [
     feel: 'soft',
     windPerformance: 'average',
     shortGame: 'run',
+    durability: 'excellent',
     bestFor: {
       handicap: 'high',
       driverDistance: 'low-mid',
@@ -1152,55 +1095,5 @@ export const balls = [
     description:
       'Mizuno\'s entry-level ball with the brand\'s signature soft feel. 566 micro-dimples optimise lift and reduce drag for consistent distance.',
     highlights: ['566 micro-dimple design', 'Soft feel for a budget ball', 'Consistent distance', 'Great introduction to Mizuno'],
-  },
-
-  // ─── Seed ────────────────────────────────────────────────────────────────────
-  {
-    id: 'seed-sd-01',
-    brand: 'Seed',
-    name: 'SD-01',
-    price: 'premium',
-    logo: '🌿',
-    coverType: 'urethane',
-    compression: 85,
-    layers: 3,
-    spin: 'high',
-    flight: 'mid',
-    feel: 'soft',
-    windPerformance: 'good',
-    shortGame: 'check',
-    bestFor: {
-      handicap: 'low-mid',
-      driverDistance: 'mid',
-      ironCompression: 'mid',
-      miss: 'any',
-    },
-    description:
-      'Seed\'s Tour-quality flagship at an accessible price point. Exceptional short-game performance from a brand that challenges the big names on value.',
-    highlights: ['Tour urethane at fair price', 'Soft feel with high spin', 'Consistent mid trajectory', 'Excellent greenside control'],
-  },
-  {
-    id: 'seed-sd-03',
-    brand: 'Seed',
-    name: 'SD-03',
-    price: 'value',
-    logo: '🌿',
-    coverType: 'ionomer',
-    compression: 55,
-    layers: 2,
-    spin: 'low',
-    flight: 'mid',
-    feel: 'soft',
-    windPerformance: 'average',
-    shortGame: 'run',
-    bestFor: {
-      handicap: 'high',
-      driverDistance: 'low-mid',
-      ironCompression: 'low',
-      miss: 'any',
-    },
-    description:
-      'Seed\'s distance ball for recreational golfers. Soft feel and low spin design helps maximise distance and keep shots straighter off the tee.',
-    highlights: ['Budget-friendly distance ball', 'Soft feel for all golfers', 'Low spin for straighter drives', 'Great value from Seed Golf'],
   },
 ];

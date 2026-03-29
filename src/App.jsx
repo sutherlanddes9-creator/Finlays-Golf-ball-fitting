@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { questions } from './data/questions';
 import { getRecommendations } from './logic/recommender';
 import QuizQuestion from './components/QuizQuestion';
@@ -10,11 +10,22 @@ const PHASE = {
   RESULTS: 'results',
 };
 
+/** Filter questions based on current answers — handles conditional questions. */
+function getActiveQuestions(answers) {
+  return questions.filter((q) => {
+    if (!q.conditionalOn) return true;
+    const { id, values } = q.conditionalOn;
+    return values.includes(answers[id]);
+  });
+}
+
 export default function App() {
   const [phase, setPhase] = useState(PHASE.WELCOME);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState({});
   const [results, setResults] = useState(null);
+
+  const activeQuestions = useMemo(() => getActiveQuestions(answers), [answers]);
 
   function handleStart() {
     setPhase(PHASE.QUIZ);
@@ -25,10 +36,14 @@ export default function App() {
 
   function handleAnswer(questionId, value) {
     const newAnswers = { ...answers, [questionId]: value };
+    // Recompute active questions with the newly recorded answer
+    const newActive = getActiveQuestions(newAnswers);
+    const nextIndex = currentIndex + 1;
+
     setAnswers(newAnswers);
 
-    if (currentIndex < questions.length - 1) {
-      setCurrentIndex(currentIndex + 1);
+    if (nextIndex < newActive.length) {
+      setCurrentIndex(nextIndex);
     } else {
       const recs = getRecommendations(newAnswers);
       setResults(recs);
@@ -100,17 +115,18 @@ export default function App() {
             <h2 className="text-4xl sm:text-5xl font-bold text-white leading-tight tracking-tight mb-4">
               Find Your{' '}
               <span className="bg-gradient-to-r from-emerald-400 to-emerald-300 bg-clip-text text-transparent">
-                Perfect Ball
+                Soulmate Ball
               </span>
             </h2>
             <p className="text-base sm:text-lg text-white/60 leading-relaxed mb-8 max-w-md">
-              Answer 10 quick questions and our fitting engine will match you with the ideal
-              golf ball from Titleist, TaylorMade, Callaway, Srixon, Bridgestone, Kirkland, Wilson, Vice, Nike, Mizuno, and Seed.
+              Answer 15 questions using our Green-to-Tee philosophy and our fitting engine will find your
+              single best match from 40+ balls including Titleist, TaylorMade, Callaway, Srixon, Bridgestone,
+              Kirkland, Wilson, Vice, Nike, Mizuno, and Seed.
             </p>
 
             {/* Feature pills */}
             <div className="flex flex-wrap justify-center gap-2 mb-10">
-              {['10 Questions', 'Pro-Level Logic', '35+ Balls Analysed', 'Personalised Fit'].map((f) => (
+              {['15 Questions', 'Green-to-Tee Method', '40+ Balls Analysed', 'Personalised Fit'].map((f) => (
                 <span
                   key={f}
                   className="text-xs bg-white/5 border border-white/10 text-white/60 px-3 py-1.5 rounded-full font-medium"
@@ -128,7 +144,7 @@ export default function App() {
               Start Your Fitting →
             </button>
 
-            <p className="mt-4 text-xs text-white/30">Takes about 2 minutes · No account required</p>
+            <p className="mt-4 text-xs text-white/30">Takes about 3 minutes · No account required</p>
 
             {/* Brand logos */}
             <div className="mt-12 pt-8 border-t border-white/5 w-full">
@@ -146,10 +162,10 @@ export default function App() {
 
         {phase === PHASE.QUIZ && (
           <QuizQuestion
-            question={questions[currentIndex]}
+            question={activeQuestions[currentIndex]}
             onAnswer={handleAnswer}
             currentStep={currentIndex + 1}
-            totalSteps={questions.length}
+            totalSteps={activeQuestions.length}
           />
         )}
 
