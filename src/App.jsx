@@ -55,12 +55,12 @@ export default function App() {
             <img
               src="/logo.png"
               alt="Finlay's Fairway Finds logo"
-              className="w-12 h-12 rounded-full object-cover shadow-lg shadow-emerald-900/50"
+              className="w-16 h-16 rounded-full object-cover shadow-lg shadow-emerald-900/50 border-2 border-emerald-500/30"
               onError={(e) => { e.currentTarget.style.display = 'none'; }}
             />
             <div>
               <p className="text-xs text-emerald-400 font-semibold tracking-widest uppercase leading-none mb-0.5">
-                Finlay&apos;s Pro Shop
+                Finlay&apos;s Fairway Finds
               </p>
               <h1 className="text-base sm:text-lg font-bold text-white leading-none tracking-tight">
                 Golf Ball Fitting
@@ -82,6 +82,14 @@ export default function App() {
       <main className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         {phase === PHASE.WELCOME && (
           <div className="flex flex-col items-center text-center max-w-xl mx-auto animate-fade-in">
+            {/* Hero logo */}
+            <img
+              src="/logo.png"
+              alt="Finlay's Fairway Finds"
+              className="w-40 h-40 sm:w-48 sm:h-48 rounded-full object-cover shadow-2xl shadow-emerald-900/60 border-4 border-emerald-500/30 mb-6"
+              onError={(e) => { e.currentTarget.style.display = 'none'; }}
+            />
+
             {/* Hero badge */}
             <div className="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold px-4 py-2 rounded-full tracking-widest uppercase mb-8">
               <span>⚡</span>
