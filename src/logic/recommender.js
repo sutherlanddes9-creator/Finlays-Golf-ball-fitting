@@ -261,6 +261,11 @@ export function getRecommendations(answers) {
     }
   }
 
+  const recommendedIds = new Set([
+    first.ball.id,
+    ...alternatives.slice(0, 2).map((item) => item.ball.id),
+  ]);
+
   return {
     primary: {
       ...first,
@@ -270,5 +275,64 @@ export function getRecommendations(answers) {
       ...item,
       whySummary: generateWhySummary(item.ball, answers),
     })),
+    avoidBalls: getAvoidBalls(answers, recommendedIds),
   };
+}
+
+/**
+ * Select up to 2 balls the user should NOT play, based on mismatch logic.
+ */
+function getAvoidBalls(answers, recommendedIds) {
+  const avoid = [];
+
+  // 1. Compression Mismatch: slow swing speed + high compression ball
+  if (['very-low', 'low'].includes(answers.driverDistance)) {
+    const highCompressionBall = balls.find(
+      (b) => b.compression > 85 && !recommendedIds.has(b.id)
+    );
+    if (highCompressionBall) {
+      avoid.push({
+        ball: highCompressionBall,
+        reason:
+          "This ball is too firm for your swing speed. You won't be able to compress the core, leading to a loss of distance and a harsh feel.",
+      });
+    }
+  }
+
+  // 2. Spin Mismatch: slicer + high-spin tour ball
+  if (answers.commonMiss === 'slice' && avoid.length < 2) {
+    const highSpinTourBall = balls.find(
+      (b) =>
+        b.spin === 'high' &&
+        b.price === 'premium' &&
+        !recommendedIds.has(b.id) &&
+        !avoid.some((a) => a.ball.id === b.id)
+    );
+    if (highSpinTourBall) {
+      avoid.push({
+        ball: highSpinTourBall,
+        reason:
+          'Because you tend to slice, this high-spin ball will actually exaggerate your side-spin, causing the ball to curve further off-line.',
+      });
+    }
+  }
+
+  // 3. Budget Mismatch: value budget + premium ball
+  if (answers.budget === 'value' && avoid.length < 2) {
+    const premiumBall = balls.find(
+      (b) =>
+        b.price === 'premium' &&
+        !recommendedIds.has(b.id) &&
+        !avoid.some((a) => a.ball.id === b.id)
+    );
+    if (premiumBall) {
+      avoid.push({
+        ball: premiumBall,
+        reason:
+          'While this is a great ball, it is a high-cost option. Based on your preferences, there are better value-for-money options available.',
+      });
+    }
+  }
+
+  return avoid;
 }
