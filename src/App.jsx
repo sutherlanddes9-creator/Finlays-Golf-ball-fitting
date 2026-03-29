@@ -94,12 +94,12 @@ export default function App() {
             </h2>
             <p className="text-base sm:text-lg text-white/60 leading-relaxed mb-8 max-w-md">
               Answer 10 quick questions and our fitting engine will match you with the ideal
-              golf ball from Titleist, TaylorMade, Callaway, Srixon, Bridgestone, and Kirkland.
+              golf ball from Titleist, TaylorMade, Callaway, Srixon, Bridgestone, Kirkland, Wilson, Vice, Nike, Mizuno, and Seed.
             </p>
 
             {/* Feature pills */}
             <div className="flex flex-wrap justify-center gap-2 mb-10">
-              {['10 Questions', 'Pro-Level Logic', '20+ Balls Analysed', 'Personalised Fit'].map((f) => (
+              {['10 Questions', 'Pro-Level Logic', '35+ Balls Analysed', 'Personalised Fit'].map((f) => (
                 <span
                   key={f}
                   className="text-xs bg-white/5 border border-white/10 text-white/60 px-3 py-1.5 rounded-full font-medium"
@@ -125,7 +125,7 @@ export default function App() {
                 Balls in our database
               </p>
               <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-white/40 font-medium">
-                {['Titleist', 'TaylorMade', 'Callaway', 'Srixon', 'Bridgestone', 'Kirkland'].map((b) => (
+                {['Titleist', 'TaylorMade', 'Callaway', 'Srixon', 'Bridgestone', 'Kirkland', 'Wilson', 'Vice', 'Nike', 'Mizuno', 'Seed'].map((b) => (
                   <span key={b}>{b}</span>
                 ))}
               </div>

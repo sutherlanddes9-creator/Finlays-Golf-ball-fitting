@@ -122,9 +122,9 @@ export const questions = [
     icon: '💳',
     type: 'single',
     options: [
-      { value: 'premium', label: 'Premium ($45–$55/dozen)', sublabel: 'I want the best, price is no concern', icon: '💎' },
-      { value: 'mid', label: 'Mid-Range ($30–$45/dozen)', sublabel: 'Good performance without paying Tour prices', icon: '💳' },
-      { value: 'value', label: 'Value (Under $30/dozen)', sublabel: 'I lose too many balls to spend more', icon: '💰' },
+      { value: 'premium', label: 'Premium (£45+/dozen)', sublabel: 'I want the best, price is no concern', icon: '💎' },
+      { value: 'mid', label: 'Mid-Range (£30–£45/dozen)', sublabel: 'Good performance without paying Tour prices', icon: '💳' },
+      { value: 'value', label: 'Value (Under £30/dozen)', sublabel: 'I lose too many balls to spend more', icon: '💰' },
     ],
   },
 ];
