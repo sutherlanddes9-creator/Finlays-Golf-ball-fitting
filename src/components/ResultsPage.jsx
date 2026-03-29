@@ -92,8 +92,48 @@ function BallCard({ result, rank }) {
   );
 }
 
+function AvoidCard({ avoidItem }) {
+  const { ball, reason } = avoidItem;
+
+  return (
+    <div className="rounded-2xl border border-red-500/40 bg-red-950/30 overflow-hidden">
+      <div className="p-5">
+        {/* Brand & ball name */}
+        <div className="flex items-start gap-4 mb-3">
+          <div className="text-3xl flex-shrink-0">{ball.logo}</div>
+          <div className="flex-1 min-w-0">
+            <p className="text-xs font-semibold text-white/50 uppercase tracking-widest mb-0.5">
+              {ball.brand}
+            </p>
+            <h3 className="text-xl font-bold text-white/90 leading-tight">{ball.name}</h3>
+          </div>
+          <span
+            className={`flex-shrink-0 text-xs font-bold px-2.5 py-1 rounded-full ${
+              ball.price === 'premium'
+                ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
+                : ball.price === 'mid'
+                ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+                : 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
+            }`}
+          >
+            {ball.price === 'premium' ? 'Premium' : ball.price === 'mid' ? 'Mid-Range' : 'Value'}
+          </span>
+        </div>
+
+        {/* Avoid reason */}
+        <div className="bg-red-900/30 border border-red-500/20 rounded-xl p-4">
+          <div className="flex items-start gap-2">
+            <span className="text-red-400 flex-shrink-0 text-base leading-snug">⚠️</span>
+            <p className="text-sm text-red-200/80 leading-relaxed">{reason}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function ResultsPage({ results, onRetake }) {
-  const { primary, alternatives } = results;
+  const { primary, alternatives, avoidBalls } = results;
 
   return (
     <div className="w-full max-w-2xl mx-auto animate-fade-in">
@@ -126,6 +166,22 @@ export default function ResultsPage({ results, onRetake }) {
           ))}
         </div>
       </div>
+
+      {/* Balls to Avoid */}
+      {avoidBalls && avoidBalls.length > 0 && (
+        <div className="mb-8">
+          <h3 className="text-sm font-bold text-red-400/70 uppercase tracking-widest mb-4 flex items-center gap-2">
+            <span className="flex-1 h-px bg-red-500/20" />
+            <span>⚠️ Balls to Avoid</span>
+            <span className="flex-1 h-px bg-red-500/20" />
+          </h3>
+          <div className="flex flex-col gap-4">
+            {avoidBalls.map((avoidItem) => (
+              <AvoidCard key={avoidItem.ball.id} avoidItem={avoidItem} />
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Retake button */}
       <div className="text-center">
