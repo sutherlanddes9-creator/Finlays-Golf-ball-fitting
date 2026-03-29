@@ -1,5 +1,10 @@
 import { balls } from '../data/balls';
 
+// Compression thresholds used throughout the scoring logic
+const HIGH_COMPRESSION_THRESHOLD = 85;
+const LOW_COMPRESSION_THRESHOLD = 70;
+const VERY_LOW_COMPRESSION_THRESHOLD = 65;
+
 /**
  * Score a single ball against the user's answers.
  * Returns a numeric score — higher is better.
@@ -152,10 +157,10 @@ function scoreBall(ball, answers) {
   else score -= 5;
 
   // Hard compression penalties
-  if (['very-low', 'low'].includes(answers.driverDistance) && ball.compression > 85) {
+  if (['very-low', 'low'].includes(answers.driverDistance) && ball.compression > HIGH_COMPRESSION_THRESHOLD) {
     score -= 15;
   }
-  if (['very-high', 'high'].includes(answers.driverDistance) && ball.compression < 70) {
+  if (['very-high', 'high'].includes(answers.driverDistance) && ball.compression < LOW_COMPRESSION_THRESHOLD) {
     score -= 10;
   }
 
@@ -231,8 +236,8 @@ function scoreBall(ball, answers) {
   // ── What They Hate About Current Ball ─────────────────────────────────────
   if (answers.currentBallHate === 'not-enough-distance') {
     // Favour balls optimised for distance at their swing speed
-    if (['very-low', 'low'].includes(answers.driverDistance) && ball.compression < 65) score += 10;
-    if (['very-high', 'high'].includes(answers.driverDistance) && ball.compression > 85) score += 8;
+    if (['very-low', 'low'].includes(answers.driverDistance) && ball.compression < VERY_LOW_COMPRESSION_THRESHOLD) score += 10;
+    if (['very-high', 'high'].includes(answers.driverDistance) && ball.compression > HIGH_COMPRESSION_THRESHOLD) score += 8;
     if (ball.flight !== 'low') score += 3;
   } else if (answers.currentBallHate === 'no-greenside-spin') {
     if (ball.coverType === 'urethane') score += 15;
@@ -409,7 +414,7 @@ function getAvoidBalls(answers, recommendedIds) {
   // 1. Compression Mismatch: slow swing + high compression
   if (['very-low', 'low'].includes(answers.driverDistance)) {
     const highCompressionBall = balls.find(
-      (b) => b.compression > 85 && !recommendedIds.has(b.id)
+      (b) => b.compression > HIGH_COMPRESSION_THRESHOLD && !recommendedIds.has(b.id)
     );
     if (highCompressionBall) {
       avoid.push({

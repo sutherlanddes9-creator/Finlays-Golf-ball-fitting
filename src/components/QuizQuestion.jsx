@@ -1,8 +1,29 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import ProgressBar from './ProgressBar';
 
 export default function QuizQuestion({ question, onAnswer, currentStep, totalSteps }) {
   const [showTooltip, setShowTooltip] = useState(false);
+  const tooltipId = `tooltip-${question.id}`;
+  const tooltipRef = useRef(null);
+
+  // Close tooltip on Escape key or outside click
+  useEffect(() => {
+    if (!showTooltip) return;
+    function handleKey(e) {
+      if (e.key === 'Escape') setShowTooltip(false);
+    }
+    function handleOutsideClick(e) {
+      if (tooltipRef.current && !tooltipRef.current.contains(e.target)) {
+        setShowTooltip(false);
+      }
+    }
+    document.addEventListener('keydown', handleKey);
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => {
+      document.removeEventListener('keydown', handleKey);
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, [showTooltip]);
 
   return (
     <div className="flex flex-col gap-6 w-full max-w-2xl mx-auto animate-fade-in">
@@ -17,16 +38,22 @@ export default function QuizQuestion({ question, onAnswer, currentStep, totalSte
             {question.title}
           </h2>
           {question.tooltip && (
-            <div className="relative flex-shrink-0 mt-1">
+            <div className="relative flex-shrink-0 mt-1" ref={tooltipRef}>
               <button
                 onClick={() => setShowTooltip((v) => !v)}
                 aria-label="Why does this matter?"
+                aria-expanded={showTooltip}
+                aria-controls={tooltipId}
                 className="w-6 h-6 rounded-full bg-white/10 hover:bg-emerald-500/30 border border-white/20 hover:border-emerald-400/60 text-white/50 hover:text-emerald-300 text-xs font-bold flex items-center justify-center transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-400"
               >
                 ?
               </button>
               {showTooltip && (
-                <div className="absolute left-1/2 -translate-x-1/2 top-8 z-20 w-72 bg-slate-800 border border-emerald-500/30 rounded-xl shadow-2xl p-4 text-left">
+                <div
+                  id={tooltipId}
+                  role="tooltip"
+                  className="absolute left-1/2 -translate-x-1/2 top-8 z-20 w-72 bg-slate-800 border border-emerald-500/30 rounded-xl shadow-2xl p-4 text-left"
+                >
                   <div className="flex items-center gap-2 mb-2">
                     <span className="text-emerald-400 text-sm">💡</span>
                     <span className="text-xs font-bold text-emerald-400 uppercase tracking-widest">Why this matters</span>
