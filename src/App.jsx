@@ -52,9 +52,12 @@ export default function App() {
       <header className="relative z-10 border-b border-white/5 bg-black/20 backdrop-blur-sm">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-emerald-500 rounded-full flex items-center justify-center shadow-lg shadow-emerald-900/50">
-              <span className="text-base leading-none">⛳</span>
-            </div>
+            <img
+              src="/logo.png"
+              alt="Finlay's Fairway Finds logo"
+              className="w-12 h-12 rounded-full object-cover shadow-lg shadow-emerald-900/50"
+              onError={(e) => { e.currentTarget.style.display = 'none'; }}
+            />
             <div>
               <p className="text-xs text-emerald-400 font-semibold tracking-widest uppercase leading-none mb-0.5">
                 Finlay&apos;s Pro Shop
