@@ -224,6 +224,112 @@ function generateWhySummary(ball, answers) {
   return reasons;
 }
 
+// Tier score ranges for match score display
+const SCORE_TIERS = {
+  primary: { min: 90, max: 100 },
+  alternative: { min: 75, max: 89 },
+  avoid: { min: 30, max: 69 },
+};
+
+// Kirkland is treated as "value" budget despite being excellent quality
+const VALUE_BUDGET_EXEMPT_BRANDS = new Set(['Kirkland']);
+
+/**
+ * Compute a 0–100 match score, clamped to the appropriate tier range.
+ * tier: 'primary' → 90–100, 'alternative' → 75–89, 'avoid' → 30–69
+ */
+function computeMatchScore(ball, answers, tier) {
+  let penalties = 0;
+
+  // Compression vs swing speed
+  if (['very-low', 'low'].includes(answers.driverDistance) && ball.compression > 85) {
+    penalties += 20;
+  } else if (['very-low', 'low'].includes(answers.driverDistance) && ball.compression > 75) {
+    penalties += 10;
+  }
+  if (['very-high', 'high'].includes(answers.driverDistance) && ball.compression < 70) {
+    penalties += 15;
+  }
+
+  // Budget mismatch — Kirkland is exempt as it offers Tour-quality at value price
+  if (answers.budget === 'value' && ball.price !== 'value' && !VALUE_BUDGET_EXEMPT_BRANDS.has(ball.brand)) {
+    penalties += 10;
+  }
+  if (answers.budget === 'mid' && ball.price === 'premium') {
+    penalties += 10;
+  }
+
+  // Spin mismatch (slicer + high-spin ball)
+  if (answers.commonMiss === 'slice' && ball.spin === 'high') {
+    penalties += 12;
+  }
+
+  // Feel mismatch
+  if (answers.feel === 'soft' && ball.feel === 'firm') {
+    penalties += 8;
+  } else if (answers.feel === 'firm' && ball.feel === 'soft') {
+    penalties += 8;
+  }
+
+  // Short game mismatch
+  if (answers.shortGame === 'check' && ball.shortGame === 'run') {
+    penalties += 12;
+  }
+
+  const rawScore = Math.max(0, 100 - penalties);
+
+  const { min, max } = SCORE_TIERS[tier] || { min: 0, max: 100 };
+  return Math.min(max, Math.max(min, Math.round(min + (rawScore / 100) * (max - min))));
+}
+
+/**
+ * Compute 0–100 sub-scores for Distance Fit, Spin Fit, and Feel Fit.
+ */
+function computeFitBreakdown(ball, answers) {
+  // Distance Fit: compression vs swing speed
+  let distanceFit = 100;
+  if (['very-low', 'low'].includes(answers.driverDistance) && ball.compression > 85) {
+    distanceFit -= 45;
+  } else if (['very-low', 'low'].includes(answers.driverDistance) && ball.compression > 75) {
+    distanceFit -= 20;
+  } else if (['very-high', 'high'].includes(answers.driverDistance) && ball.compression < 70) {
+    distanceFit -= 35;
+  } else if (['very-high', 'high'].includes(answers.driverDistance) && ball.compression < 80) {
+    distanceFit -= 12;
+  }
+  // Ideal compression range [min, max] by driver distance / swing speed
+  const idealRanges = {
+    'very-high': [90, 110], high: [80, 100], mid: [70, 90], low: [60, 80], 'very-low': [40, 70],
+  };
+  const [lo, hi] = idealRanges[answers.driverDistance] || [60, 90];
+  if (ball.compression >= lo && ball.compression <= hi) distanceFit = Math.min(100, distanceFit + 5);
+
+  // Spin Fit: commonMiss + shortGame vs ball spin / cover
+  let spinFit = 100;
+  if (answers.commonMiss === 'slice') {
+    if (ball.spin === 'high') spinFit -= 40;
+    else if (ball.spin === 'mid') spinFit -= 10;
+  } else if (answers.commonMiss === 'hook') {
+    if (ball.spin === 'low') spinFit -= 10;
+  }
+  if (answers.shortGame === 'check' && ball.shortGame === 'run') spinFit -= 30;
+  else if (answers.shortGame === 'check' && ball.coverType !== 'urethane') spinFit -= 15;
+  else if (answers.shortGame === 'run' && ball.shortGame === 'check') spinFit -= 5;
+
+  // Feel Fit: feel preference vs ball feel
+  let feelFit = 100;
+  if (answers.feel === 'soft' && ball.feel === 'firm') feelFit -= 45;
+  else if (answers.feel === 'soft' && ball.feel === 'mid') feelFit -= 15;
+  else if (answers.feel === 'firm' && ball.feel === 'soft') feelFit -= 45;
+  else if (answers.feel === 'firm' && ball.feel === 'mid') feelFit -= 15;
+
+  return {
+    distanceFit: Math.max(20, Math.min(100, distanceFit)),
+    spinFit: Math.max(20, Math.min(100, spinFit)),
+    feelFit: Math.max(20, Math.min(100, feelFit)),
+  };
+}
+
 /**
  * Main recommendation function.
  * Returns { primary, alternatives } where each item includes the ball + score + whySummary.
@@ -270,10 +376,14 @@ export function getRecommendations(answers) {
     primary: {
       ...first,
       whySummary: generateWhySummary(first.ball, answers),
+      matchScore: computeMatchScore(first.ball, answers, 'primary'),
+      fitBreakdown: computeFitBreakdown(first.ball, answers),
     },
     alternatives: alternatives.slice(0, 2).map((item) => ({
       ...item,
       whySummary: generateWhySummary(item.ball, answers),
+      matchScore: computeMatchScore(item.ball, answers, 'alternative'),
+      fitBreakdown: computeFitBreakdown(item.ball, answers),
     })),
     avoidBalls: getAvoidBalls(answers, recommendedIds),
   };
@@ -295,6 +405,8 @@ function getAvoidBalls(answers, recommendedIds) {
         ball: highCompressionBall,
         reason:
           "This ball is too firm for your swing speed. You won't be able to compress the core, leading to a loss of distance and a harsh feel.",
+        matchScore: computeMatchScore(highCompressionBall, answers, 'avoid'),
+        fitBreakdown: computeFitBreakdown(highCompressionBall, answers),
       });
     }
   }
@@ -313,6 +425,8 @@ function getAvoidBalls(answers, recommendedIds) {
         ball: highSpinTourBall,
         reason:
           'Because you tend to slice, this high-spin ball will actually exaggerate your side-spin, causing the ball to curve further off-line.',
+        matchScore: computeMatchScore(highSpinTourBall, answers, 'avoid'),
+        fitBreakdown: computeFitBreakdown(highSpinTourBall, answers),
       });
     }
   }
@@ -330,6 +444,8 @@ function getAvoidBalls(answers, recommendedIds) {
         ball: premiumBall,
         reason:
           'While this is a great ball, it is a high-cost option. Based on your preferences, there are better value-for-money options available.',
+        matchScore: computeMatchScore(premiumBall, answers, 'avoid'),
+        fitBreakdown: computeFitBreakdown(premiumBall, answers),
       });
     }
   }

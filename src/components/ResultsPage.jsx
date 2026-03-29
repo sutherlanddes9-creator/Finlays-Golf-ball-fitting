@@ -1,6 +1,89 @@
+// Score thresholds and colours (kept consistent between ring and bars)
+const SCORE_EXCELLENT = 90;
+const SCORE_GOOD = 70;
+const COLOR_GREEN = '#10b981';
+const COLOR_YELLOW = '#f59e0b';
+const COLOR_RED = '#ef4444';
+
+function scoreColor(score) {
+  return score >= SCORE_EXCELLENT ? COLOR_GREEN : score >= SCORE_GOOD ? COLOR_YELLOW : COLOR_RED;
+}
+
+function scoreBarClass(score) {
+  return score >= SCORE_EXCELLENT ? 'bg-emerald-500' : score >= SCORE_GOOD ? 'bg-amber-500' : 'bg-red-500';
+}
+
+function MatchScoreRing({ score }) {
+  const size = 76;
+  const strokeWidth = 7;
+  const radius = (size - strokeWidth) / 2;
+  const circumference = 2 * Math.PI * radius;
+  const offset = circumference - (score / 100) * circumference;
+  const color = scoreColor(score);
+
+  return (
+    <div className="relative flex-shrink-0" style={{ width: size, height: size }}>
+      <svg width={size} height={size} style={{ transform: 'rotate(-90deg)' }}>
+        <circle
+          cx={size / 2}
+          cy={size / 2}
+          r={radius}
+          fill="none"
+          stroke="rgba(255,255,255,0.08)"
+          strokeWidth={strokeWidth}
+        />
+        <circle
+          cx={size / 2}
+          cy={size / 2}
+          r={radius}
+          fill="none"
+          stroke={color}
+          strokeWidth={strokeWidth}
+          strokeDasharray={circumference}
+          strokeDashoffset={offset}
+          strokeLinecap="round"
+          style={{ transition: 'stroke-dashoffset 1s ease-in-out' }}
+        />
+      </svg>
+      <div className="absolute inset-0 flex flex-col items-center justify-center">
+        <span className="text-sm font-bold leading-none" style={{ color }}>{score}%</span>
+        <span className="text-[9px] leading-none mt-0.5" style={{ color: 'rgba(255,255,255,0.4)' }}>match</span>
+      </div>
+    </div>
+  );
+}
+
+function FitBreakdown({ fitBreakdown }) {
+  const bars = [
+    { label: 'Distance Fit', value: fitBreakdown.distanceFit },
+    { label: 'Spin Fit', value: fitBreakdown.spinFit },
+    { label: 'Feel Fit', value: fitBreakdown.feelFit },
+  ];
+
+  return (
+    <div className="mt-4 pt-4 border-t border-white/10">
+      <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-3">Why this score?</p>
+      <div className="space-y-2.5">
+        {bars.map(({ label, value }) => (
+          <div key={label} className="flex items-center gap-3">
+            <span className="text-xs text-white/50 w-20 flex-shrink-0">{label}</span>
+            <div className="flex-1 bg-white/5 rounded-full h-1.5 overflow-hidden">
+              <div
+                className={`h-full rounded-full ${scoreBarClass(value)} transition-all duration-700`}
+                style={{ width: `${value}%` }}
+              />
+            </div>
+            <span className="text-xs text-white/40 w-8 text-right">{value}%</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function BallCard({ result, rank }) {
   const isPrimary = rank === 1;
-  const { ball, whySummary } = result;
+  const { ball, whySummary, matchScore, fitBreakdown } = result;
 
   return (
     <div
@@ -21,25 +104,29 @@ function BallCard({ result, rank }) {
         <div className="flex items-start gap-4 mb-4">
           <div className="text-3xl flex-shrink-0">{ball.logo}</div>
           <div className="flex-1 min-w-0">
-            <p className="text-xs font-semibold text-white/50 uppercase tracking-widest mb-0.5">
-              {ball.brand}
-            </p>
+            <div className="flex items-center gap-2 flex-wrap mb-0.5">
+              <p className="text-xs font-semibold text-white/50 uppercase tracking-widest">
+                {ball.brand}
+              </p>
+              {/* Price badge */}
+              <span
+                className={`text-xs font-bold px-2 py-0.5 rounded-full ${
+                  ball.price === 'premium'
+                    ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
+                    : ball.price === 'mid'
+                    ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+                    : 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
+                }`}
+              >
+                {ball.price === 'premium' ? 'Premium' : ball.price === 'mid' ? 'Mid-Range' : 'Value'}
+              </span>
+            </div>
             <h3 className={`font-bold leading-tight ${isPrimary ? 'text-2xl text-white' : 'text-xl text-white/90'}`}>
               {ball.name}
             </h3>
           </div>
-          {/* Price badge */}
-          <span
-            className={`flex-shrink-0 text-xs font-bold px-2.5 py-1 rounded-full ${
-              ball.price === 'premium'
-                ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
-                : ball.price === 'mid'
-                ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
-                : 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
-            }`}
-          >
-            {ball.price === 'premium' ? 'Premium' : ball.price === 'mid' ? 'Mid-Range' : 'Value'}
-          </span>
+          {/* Match score ring */}
+          {matchScore !== undefined && <MatchScoreRing score={matchScore} />}
         </div>
 
         {/* Stats row */}
@@ -87,13 +174,16 @@ function BallCard({ result, rank }) {
             </span>
           ))}
         </div>
+
+        {/* Fit breakdown */}
+        {fitBreakdown && <FitBreakdown fitBreakdown={fitBreakdown} />}
       </div>
     </div>
   );
 }
 
 function AvoidCard({ avoidItem }) {
-  const { ball, reason } = avoidItem;
+  const { ball, reason, matchScore, fitBreakdown } = avoidItem;
 
   return (
     <div className="rounded-2xl border border-red-500/40 bg-red-950/30 overflow-hidden">
@@ -102,22 +192,26 @@ function AvoidCard({ avoidItem }) {
         <div className="flex items-start gap-4 mb-3">
           <div className="text-3xl flex-shrink-0">{ball.logo}</div>
           <div className="flex-1 min-w-0">
-            <p className="text-xs font-semibold text-white/50 uppercase tracking-widest mb-0.5">
-              {ball.brand}
-            </p>
+            <div className="flex items-center gap-2 flex-wrap mb-0.5">
+              <p className="text-xs font-semibold text-white/50 uppercase tracking-widest">
+                {ball.brand}
+              </p>
+              <span
+                className={`text-xs font-bold px-2 py-0.5 rounded-full ${
+                  ball.price === 'premium'
+                    ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
+                    : ball.price === 'mid'
+                    ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+                    : 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
+                }`}
+              >
+                {ball.price === 'premium' ? 'Premium' : ball.price === 'mid' ? 'Mid-Range' : 'Value'}
+              </span>
+            </div>
             <h3 className="text-xl font-bold text-white/90 leading-tight">{ball.name}</h3>
           </div>
-          <span
-            className={`flex-shrink-0 text-xs font-bold px-2.5 py-1 rounded-full ${
-              ball.price === 'premium'
-                ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
-                : ball.price === 'mid'
-                ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
-                : 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
-            }`}
-          >
-            {ball.price === 'premium' ? 'Premium' : ball.price === 'mid' ? 'Mid-Range' : 'Value'}
-          </span>
+          {/* Match score ring */}
+          {matchScore !== undefined && <MatchScoreRing score={matchScore} />}
         </div>
 
         {/* Avoid reason */}
@@ -127,6 +221,9 @@ function AvoidCard({ avoidItem }) {
             <p className="text-sm text-red-200/80 leading-relaxed">{reason}</p>
           </div>
         </div>
+
+        {/* Fit breakdown */}
+        {fitBreakdown && <FitBreakdown fitBreakdown={fitBreakdown} />}
       </div>
     </div>
   );
